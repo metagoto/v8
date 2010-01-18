@@ -22,9 +22,10 @@ var_dump($c->set('obj2', $obj));
 
 var_dump($c->get('obj'));
 
+var_dump($c->get('obj2'));
 
 
-var_dump($c->run('obj.propa'));
+var_dump($c->run('obj.propb'));
 
 /*
 unset($obj);

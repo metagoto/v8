@@ -2,6 +2,8 @@ php extension for Google's v8 javascript engine
 
 Requires php 5.3+ and libv8 <http://code.google.com/p/v8/>
 
+-Highly experimental-
+
 
 NOTES
 -----
@@ -9,6 +11,38 @@ NOTES
 The v8 javascript engine is not natively thread safe. 
 This extension does not work around it (at least for now).
 Please use a single threaded sapi (CLI, fastcgi, fpm..)
+
+
+INTERFACE
+---------
+
+The extension interface has been refactored to make it more similar
+to the spidermonkey PECL extension <http://pecl.php.net/package/spidermonkey>
+
+class V8Context {
+
+  // php types for V8Context::set()
+  const PHP_VALUE   = 0;
+  const PHP_FUNCTION= 1;
+  const PHP_CLASS   = 2;
+
+  bool  function set($var_name, $value [, $type = V8Context::PHP_VALUE]);
+
+  mixed function get($var_name);
+
+  bool  function exists($var_name);
+
+  bool  function unset($var_name);
+
+  // evals the js code and returns the result
+  mixed function run($js_code);
+
+  // same as set($js_name, $callable, V8Context::PHP_FUNCTION)
+  bool registerFunction($callable [, $js_name]);
+
+  // same as set($js_name, $class_name, V8Context::PHP_CLASS)
+  bool registerClass($class_name [, $js_name]);
+}
 
 
 INSTALLATION
