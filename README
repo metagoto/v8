@@ -1,0 +1,36 @@
+php extension for Google's v8 javascript engine 
+
+Requires php 5.3+ and libv8 <http://code.google.com/p/v8/>
+
+
+NOTES
+-----
+
+The v8 javascript engine is not natively thread safe. 
+This extension does not work around it (at least for now).
+Please use a single threaded sapi (CLI, fastcgi, fpm..)
+
+
+INSTALLATION
+------------
+
+phpize and php-config must be in your PATH.
+If not, please specify their full path in the following commands.
+
+$ cd /path/to/this/extension/v8
+
+$ phpize
+(or /path/to/phpize if phpize is not in your path)
+
+$ ./configure --with-v8=/path/to/google/v8
+(or ./configure --with-php-config=/path/to/php-config 
+if php-config is not in your path)
+
+$ make
+
+$ cp modules/v8.so /to/wherever/you/want/it
+
+Add the following line to php.ini:
+extension="/wherever/you/put/it/v8.so"
+
+Restart your webserver
